@@ -19,7 +19,7 @@ public class TaskService {
 		return taskSaved;
 	}
 
-	public List<TaskEntity> listAll() {
+	public List<TaskEntity> findAll() {
 		List<TaskEntity> taskList = this.taskRepository.findAll();
 		return taskList;
 	}

@@ -34,10 +34,10 @@ public class TaskController {
 		}
 	}
 	
-	@GetMapping("/listAll")
-	public ResponseEntity<List<TaskEntity>> listAll(){
+	@GetMapping("/findAll")
+	public ResponseEntity<List<TaskEntity>> findAll(){
 		try {
-			List<TaskEntity> tasklList = this.taskService.listAll();
+			List<TaskEntity> tasklList = this.taskService.findAll();
 			return new ResponseEntity<List<TaskEntity>>(tasklList, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
