@@ -45,7 +45,7 @@ public class TaskController {
 	}
 	
 	@GetMapping("/findById/{id}")
-	public ResponseEntity<TaskEntity> findById (@PathVariable int id){
+	public ResponseEntity<TaskEntity> findById (@PathVariable Long id){
 		try {
 			TaskEntity taskFound = this.taskService.findById(id);
 			return new ResponseEntity<TaskEntity>(taskFound, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class TaskController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<TaskEntity> update (@PathVariable int id, @RequestBody TaskEntity taskOriginal){
+	public ResponseEntity<TaskEntity> update (@PathVariable Long id, @RequestBody TaskEntity taskOriginal){
 		try {
 			TaskEntity taskUpdated = this.taskService.update(id, taskOriginal);
 			return new ResponseEntity<TaskEntity>(taskUpdated, HttpStatus.OK);
@@ -65,7 +65,7 @@ public class TaskController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<TaskEntity> delete (@PathVariable int id){
+	public ResponseEntity<TaskEntity> delete (@PathVariable Long id){
 		try {
 			TaskEntity taskDeleted = this.taskService.delete(id);
 			return new ResponseEntity<TaskEntity>(taskDeleted, HttpStatus.OK);
