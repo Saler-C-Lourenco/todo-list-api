@@ -55,9 +55,9 @@ public class TaskController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<TaskEntity> update (@PathVariable Long id, @RequestBody TaskEntity taskOriginal){
+	public ResponseEntity<TaskEntity> update (@PathVariable Long id, @RequestBody TaskEntity taskRequested){
 		try {
-			TaskEntity taskUpdated = this.taskService.update(id, taskOriginal);
+			TaskEntity taskUpdated = this.taskService.update(id, taskRequested);
 			return new ResponseEntity<TaskEntity>(taskUpdated, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
