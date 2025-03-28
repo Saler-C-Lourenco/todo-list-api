@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.salerclorenco.todo_api.entity.TaskEntity;
+import com.salerclorenco.todo_api.entity.Task;
 import com.salerclorenco.todo_api.service.TaskService;
 
 @RestController
@@ -25,50 +25,50 @@ public class TaskController {
 	private TaskService taskService;
 	
 	@PostMapping("/save")
-	public ResponseEntity<TaskEntity> save (@RequestBody TaskEntity task){
+	public ResponseEntity<Task> save (@RequestBody Task task){
 		try {
-			TaskEntity savedTask = this.taskService.save(task);
-			return new ResponseEntity<TaskEntity>(savedTask, HttpStatus.OK);
+			Task savedTask = this.taskService.save(task);
+			return new ResponseEntity<Task>(savedTask, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@GetMapping("/findAll")
-	public ResponseEntity<List<TaskEntity>> findAll(){
+	public ResponseEntity<List<Task>> findAll(){
 		try {
-			List<TaskEntity> tasklList = this.taskService.findAll();
-			return new ResponseEntity<List<TaskEntity>>(tasklList, HttpStatus.OK);
+			List<Task> tasklList = this.taskService.findAll();
+			return new ResponseEntity<List<Task>>(tasklList, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@GetMapping("/findById/{id}")
-	public ResponseEntity<TaskEntity> findById (@PathVariable Long id){
+	public ResponseEntity<Task> findById (@PathVariable Long id){
 		try {
-			TaskEntity taskFound = this.taskService.findById(id);
-			return new ResponseEntity<TaskEntity>(taskFound, HttpStatus.OK);
+			Task taskFound = this.taskService.findById(id);
+			return new ResponseEntity<Task>(taskFound, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<TaskEntity> update (@PathVariable Long id, @RequestBody TaskEntity taskRequested){
+	public ResponseEntity<Task> update (@PathVariable Long id, @RequestBody Task taskRequested){
 		try {
-			TaskEntity taskUpdated = this.taskService.update(id, taskRequested);
-			return new ResponseEntity<TaskEntity>(taskUpdated, HttpStatus.OK);
+			Task taskUpdated = this.taskService.update(id, taskRequested);
+			return new ResponseEntity<Task>(taskUpdated, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<TaskEntity> delete (@PathVariable Long id){
+	public ResponseEntity<Task> delete (@PathVariable Long id){
 		try {
-			TaskEntity taskDeleted = this.taskService.delete(id);
-			return new ResponseEntity<TaskEntity>(taskDeleted, HttpStatus.OK);
+			Task taskDeleted = this.taskService.delete(id);
+			return new ResponseEntity<Task>(taskDeleted, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}

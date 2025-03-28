@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.salerclorenco.todo_api.entity.TaskEntity;
+import com.salerclorenco.todo_api.entity.Task;
 import com.salerclorenco.todo_api.repository.TaskRepository;
 
 @Service
@@ -15,36 +15,36 @@ public class TaskService {
 	@Autowired
 	private TaskRepository taskRepository;
 
-	public TaskEntity save(TaskEntity task) {
-		TaskEntity taskSaved = this.taskRepository.save(task);
+	public Task save(Task task) {
+		Task taskSaved = this.taskRepository.save(task);
 		return taskSaved;
 	}
 
-	public List<TaskEntity> findAll() {
-		List<TaskEntity> taskList = this.taskRepository.findAll();
+	public List<Task> findAll() {
+		List<Task> taskList = this.taskRepository.findAll();
 		return taskList;
 	}
 
-	public TaskEntity findById(Long id) {
+	public Task findById(Long id) {
 		if (id > 0) {
-			Optional<TaskEntity> taskFound = this.taskRepository.findById(id);
+			Optional<Task> taskFound = this.taskRepository.findById(id);
 			return taskFound.get();
 		}
 		return null;
 	}
 
-	public TaskEntity update(Long id, TaskEntity taskRequested) {
+	public Task update(Long id, Task taskRequested) {
 		if (this.findById(id) != null) {
 			taskRequested.setId(id);
-			TaskEntity taskUpdated = this.taskRepository.save(taskRequested);
+			Task taskUpdated = this.taskRepository.save(taskRequested);
 			return taskUpdated;
 		}
 
 		return null;
 	}
 
-	public TaskEntity delete(Long id) {
-		TaskEntity taskDeleted = this.findById(id);
+	public Task delete(Long id) {
+		Task taskDeleted = this.findById(id);
 		if (taskDeleted != null) {
 			this.taskRepository.deleteById(id);
 			return taskDeleted;
