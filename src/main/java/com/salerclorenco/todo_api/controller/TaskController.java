@@ -17,14 +17,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.salerclorenco.todo_api.entity.Task;
 import com.salerclorenco.todo_api.service.TaskService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
-@RequestMapping("/task")
+@RequestMapping(value  = "/task", produces = {"application/json"})
+@Tag(name = "To-Do-List-API")
 public class TaskController {
 
 	@Autowired
 	private TaskService taskService;
 	
-	@PostMapping("/save")
+	@Operation(summary = "Cria novas tarefas", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Nova tarefa criada com sucesso."),
+			@ApiResponse(responseCode = "400", description = "Houve algum erro.")
+	})
+	@PostMapping(value = "/save", consumes = "application/json")
 	public ResponseEntity<Task> save (@RequestBody Task task){
 		try {
 			Task savedTask = this.taskService.save(task);
@@ -34,7 +45,12 @@ public class TaskController {
 		}
 	}
 	
-	@GetMapping("/findAll")
+	@Operation(summary = "Busca todos os dados de tarefas cadastradas no banco de dados", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Busca realizada com sucesso."),
+			@ApiResponse(responseCode = "400", description = "Houve algum eroo.")
+	})
+	@GetMapping(value = "/findAll")
 	public ResponseEntity<List<Task>> findAll(){
 		try {
 			List<Task> tasklList = this.taskService.findAll();
@@ -44,7 +60,7 @@ public class TaskController {
 		}
 	}
 	
-	@GetMapping("/findById/{id}")
+	@GetMapping(value = "/findById/{id}")
 	public ResponseEntity<Task> findById (@PathVariable Long id){
 		try {
 			Task taskFound = this.taskService.findById(id);
@@ -54,7 +70,7 @@ public class TaskController {
 		}
 	}
 	
-	@PutMapping("/update/{id}")
+	@PutMapping(value = "/update/{id}")
 	public ResponseEntity<Task> update (@PathVariable Long id, @RequestBody Task taskRequested){
 		try {
 			Task taskUpdated = this.taskService.update(id, taskRequested);
@@ -64,7 +80,7 @@ public class TaskController {
 		}
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping(value = "/delete/{id}")
 	public ResponseEntity<Task> delete (@PathVariable Long id){
 		try {
 			Task taskDeleted = this.taskService.delete(id);
