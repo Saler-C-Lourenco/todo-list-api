@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### teste pessoal curso spring ###
+src/main/java/com/salerclorenco/todo_api/service/TesteService.java
+src/main/java/com/salerclorenco/todo_api/controller/TesteController.java
+src/main/java/com/salerclorenco/todo_api/entity/EntradaEntity.java
+src/main/java/com/salerclorenco/todo_api/entity/SaidaEntity.java
+
+
