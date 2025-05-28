@@ -48,7 +48,7 @@ public class TaskController {
 	@Operation(summary = "Busca todos os dados de tarefas cadastradas no banco de dados", method = "GET")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Busca realizada com sucesso."),
-			@ApiResponse(responseCode = "400", description = "Houve algum eroo.")
+			@ApiResponse(responseCode = "400", description = "Houve algum erro.")
 	})
 	@GetMapping(value = "/findAll")
 	public ResponseEntity<List<Task>> findAll(){
@@ -60,6 +60,11 @@ public class TaskController {
 		}
 	}
 	
+	@Operation(summary = "Busca uma tarefa específica cadastrada no banco de dados.", method = "GET")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Busca realizada com sucesso."),
+			@ApiResponse(responseCode = "400", description = "Houve algum erro.")
+	})
 	@GetMapping(value = "/findById/{id}")
 	public ResponseEntity<Task> findById (@PathVariable Long id){
 		try {
@@ -70,6 +75,11 @@ public class TaskController {
 		}
 	}
 	
+	@Operation(summary = "Atualiza uma tarefa específica cadastrada no banco de dados com novas informações fornecidas pelo usuário", method = "PUT")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Tarefa atualizada com sucesso."),
+			@ApiResponse(responseCode = "400", description = "Houve algum erro.")
+	})
 	@PutMapping(value = "/update/{id}")
 	public ResponseEntity<Task> update (@PathVariable Long id, @RequestBody Task taskRequested){
 		try {
@@ -80,6 +90,11 @@ public class TaskController {
 		}
 	}
 	
+	@Operation(summary = "Deleta uma tarefa específica cadastrada no banco de dados.", method = "DELETE")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Tarefa deletada com sucesso."),
+			@ApiResponse(responseCode = "400", description = "Houve algum erro.")
+	})
 	@DeleteMapping(value = "/delete/{id}")
 	public ResponseEntity<Task> delete (@PathVariable Long id){
 		try {
