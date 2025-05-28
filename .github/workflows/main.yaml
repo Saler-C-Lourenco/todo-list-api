@@ -41,6 +41,9 @@ jobs:
             sleep 3
           done
 
+      - name: Grant execute permission to mvnw
+        run: chmod +x mvnw
+
       - name: Run tests
         run: ./mvnw test
 
